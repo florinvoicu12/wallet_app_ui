@@ -7,7 +7,7 @@ class TileComponent extends StatelessWidget {
     required this.svg,
     required this.title,
     required this.subtitle,
-    this.color,
+    required this.color,
     required this.borderRadius,
   });
 

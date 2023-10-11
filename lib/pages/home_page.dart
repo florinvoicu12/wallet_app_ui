@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:wallet_app/components/button_component.dart';
-import 'package:wallet_app/components/card_widget.dart';
-import 'package:wallet_app/components/tile_component.dart';
+import 'package:wallet_app/components/button_components_list.dart';
+import 'package:wallet_app/components/card_widgets_list.dart';
+import 'package:wallet_app/components/tile_components_list.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -22,30 +22,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.home,
-                size: 32,
-                color: Colors.pink,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.settings,
-                size: 32,
-                color: Colors.grey,
-              ),
-            )
-          ]),
-        ),
-      ),
+      bottomNavigationBar: _buildAppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(0),
@@ -53,7 +30,7 @@ class HomePage extends StatelessWidget {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                TitleSection(),
+                _buildTitleSection(),
                 SizedBox(
                   height: 25,
                 ),
@@ -75,34 +52,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 25,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TileComponent(
-                      title: "Statistics",
-                      subtitle: "Payments and income",
-                      svg: "assets/Heart.svg",
-                      color: Colors.deepPurpleAccent.withAlpha(100),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(22),
-                          topRight: Radius.circular(22)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 19, right: 19),
-                      child: const Divider(
-                        height: 0.1,
-                      ),
-                    ),
-                    TileComponent(
-                        title: "Transactions",
-                        subtitle: "Transaction history",
-                        svg: "assets/transaction-history.svg",
-                        color: Colors.deepPurpleAccent.withAlpha(100),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(22),
-                            bottomRight: Radius.circular(22))),
-                  ],
-                )
+                TileComponentsList()
               ],
             ),
           ),
@@ -112,80 +62,41 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class CardWidgetsList extends StatelessWidget {
-  const CardWidgetsList({
-    super.key,
-    required PageController controller,
-  }) : _controller = controller;
-
-  final PageController _controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      child: PageView(controller: _controller, children: [
-        CardWidget(
-          balance: 1250.50,
-          cardNumber: 4322,
-          expiryMonth: 10,
-          expiryYear: 27,
-          color: Colors.blue,
-        ),
-        CardWidget(
-          balance: 3000.00,
-          cardNumber: 5440,
-          expiryMonth: 3,
-          expiryYear: 26,
-          color: Colors.green,
-        ),
-        CardWidget(
-          balance: 5250.43,
-          cardNumber: 3243,
-          expiryMonth: 12,
-          expiryYear: 24,
-          color: Colors.red,
-        ),
-      ]),
-    );
-  }
-}
-
-class ButtonComponentsList extends StatelessWidget {
-  const ButtonComponentsList({
+class _buildAppBar extends StatelessWidget {
+  const _buildAppBar({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+    return BottomAppBar(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ButtonComponent(
-              svg: "assets/wallet-svg.svg",
-              buttonTitle: "Send",
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.home,
+              size: 32,
+              color: Colors.pink,
             ),
-            ButtonComponent(
-              svg: "assets/wallet-svg.svg",
-              buttonTitle: "Pay",
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.settings,
+              size: 32,
+              color: Colors.grey,
             ),
-            ButtonComponent(
-              svg: "assets/transaction-history.svg",
-              buttonTitle: "Bills",
-            ),
-          ],
-        ),
+          )
+        ]),
       ),
     );
   }
 }
 
-class TitleSection extends StatelessWidget {
-  const TitleSection({
+class _buildTitleSection extends StatelessWidget {
+  const _buildTitleSection({
     super.key,
   });
 
